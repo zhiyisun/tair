@@ -44,7 +44,7 @@ if WITH_COMPRESS
 COMPRESS_LDFLAGS=-lsnappy
 endif
 
-AM_LDFLAGS=-lpthread -lz -lrt ${GCOV_LIB} ${COMPRESS_LDFLAGS}
+AM_LDFLAGS=-pthread -lz -lrt ${GCOV_LIB} ${COMPRESS_LDFLAGS}
 
 lib_LTLIBRARIES=libtairclientapi.la libtairclientapi_c.la libtairclientapi_impl.la ${mc_impl_lib}
 sbin_PROGRAMS=tairclient keycleantool

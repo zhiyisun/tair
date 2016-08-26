@@ -6,7 +6,7 @@ if WITH_TCMALLOC
 AM_CPPFLAGS += -DWITH_TCMALLOC
 endif
 
-AM_LDFLAGS=-lpthread -lrt ${GCOV_LIB}
+AM_LDFLAGS=-pthread -lrt ${GCOV_LIB}
 noinst_LIBRARIES=libldb.a
 
 libldb_a_SOURCES=ldb_manager.cpp ldb_manager.hpp ldb_instance.hpp ldb_instance.cpp stat_manager.cpp stat_manager.hpp ldb_define.hpp ldb_define.cpp bg_task.hpp bg_task.cpp ldb_comparator.hpp ldb_numeric_comparator.cpp ldb_comparator.cpp ldb_gc_factory.hpp ldb_gc_factory.cpp ldb_cache_stat.hpp ldb_cache_stat.cpp ldb_bloom.cpp ldb_remote_sync_logger.hpp ldb_remote_sync_logger.cpp ldb_balancer.hpp ldb_balancer.cpp
@@ -48,7 +48,7 @@ libleveldb_a_SOURCES= \
 	${leveldb_srcdir}/db/version_edit.h ${leveldb_srcdir}/db/version_set.h \
 	${leveldb_srcdir}/db/write_batch_internal.h ${leveldb_srcdir}/db/db_impl.h ${leveldb_srcdir}/db/dbformat.h \
 	${leveldb_srcdir}/db/log_format.h ${leveldb_srcdir}/db/log_writer.h ${leveldb_srcdir}/db/skiplist.h \
-	${leveldb_srcdir}/db/table_cache.h ${leveldb_srcdir}/port/atomic_pointer.h ${leveldb_srcdir}/port/atomic_count.h \
+	${leveldb_srcdir}/db/table_cache.h ${leveldb_srcdir}/port/atomic_pointer.h \
 	${leveldb_srcdir}/port/port.h ${leveldb_srcdir}/port/port_android.h ${leveldb_srcdir}/port/port_example.h \
 	${leveldb_srcdir}/port/port_posix.h ${leveldb_srcdir}/port/sha1_portable.h ${leveldb_srcdir}/table/block.h \
 	${leveldb_srcdir}/table/block_builder.h ${leveldb_srcdir}/table/format.h ${leveldb_srcdir}/table/iterator_wrapper.h \

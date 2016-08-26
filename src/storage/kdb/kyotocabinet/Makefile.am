@@ -1,4 +1,4 @@
-AM_LDFLAGS=-lpthread ${GCOV_LIB}
+AM_LDFLAGS=-pthread ${GCOV_LIB}
 
 noinst_LIBRARIES=libkyotocabinet.a
 

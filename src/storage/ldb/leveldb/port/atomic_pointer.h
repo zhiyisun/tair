@@ -36,6 +36,10 @@
 #define ARCH_CPU_X86_FAMILY 1
 #elif defined(__ARMEL__)
 #define ARCH_CPU_ARM_FAMILY 1
+#elif defined(__aarch64__)
+#define ARCH_CPU_ARM64_FAMILY 1
+#elif defined(__mips__)
+#define ARCH_CPU_MIPS_FAMILY 1
 #endif
 
 namespace leveldb {
@@ -80,6 +84,13 @@ LinuxKernelMemoryBarrierFunc pLinuxKernelMemoryBarrier __attribute__((weak)) =
     (LinuxKernelMemoryBarrierFunc) 0xffff0fa0;
 inline void MemoryBarrier() {
   pLinuxKernelMemoryBarrier();
+}
+#define LEVELDB_HAVE_MEMORY_BARRIER
+
+// ARM64
+#elif defined(ARCH_CPU_ARM64_FAMILY)
+inline void MemoryBarrier() {
+  asm volatile("dmb sy" : : : "memory");
 }
 #define LEVELDB_HAVE_MEMORY_BARRIER
 
@@ -137,6 +148,7 @@ class AtomicPointer {
 #undef LEVELDB_HAVE_MEMORY_BARRIER
 #undef ARCH_CPU_X86_FAMILY
 #undef ARCH_CPU_ARM_FAMILY
+#undef ARCH_CPU_ARM64_FAMILY
 
 }  // namespace port
 }  // namespace leveldb
