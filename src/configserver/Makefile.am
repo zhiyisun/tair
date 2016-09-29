@@ -5,7 +5,7 @@ AM_CPPFLAGS= -I$(TBLIB_ROOT)/include/tbsys \
 	     -I${top_srcdir}/src/packets
 
 AM_LDFLAGS= -rdynamic ${GCOV_LIB} \
-      -lz -lrt -lpthread \
+      -lz -lrt -pthread \
       -ldl
 
 LDADD=$(TBLIB_ROOT)/lib/libtbnet.a \

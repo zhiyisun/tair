@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 if [ $# != 3 ]; then
 	echo "Usage: $0 role base_path server_table"; # 0 is the first config, other means defalut slave config. etc: bin/check_version.sh 0 /home/admin/tair_2.3  group_session_server_table

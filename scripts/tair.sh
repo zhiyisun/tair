@@ -1,3 +1,5 @@
+#!/bin/bash
+
 TAIR_DIR=`dirname $0`
 TAIR_BIN_DIR=./sbin
 TAIR_ETC_DIR=./etc
@@ -46,7 +48,7 @@ check_shm_size()
   if [ $engine == "mdb" ]
   then
     safety_free_size=500;
-    tmpfs_size=`df -m |grep tmpfs | awk '{print $2}'`
+    tmpfs_size=`df -m |grep "/dev/shm" | awk '{print $2}'`
     let "safety_size = $tmpfs_size - $safety_free_size"
     slab_mem_size=`grep slab_mem_size $1 | grep -v "#" | awk -F '[ =]' '{print $NF}'`
 

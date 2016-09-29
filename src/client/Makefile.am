@@ -26,9 +26,9 @@ mc_impl_header=tair_mc_client_api.hpp diamond_manager.hpp cluster_controller.hpp
 endif
 
 api_source_list=tair_client_api.cpp i_tair_client_impl.hpp i_tair_client_impl.cpp tair_client_api_impl.cpp \
-		${top_srcdir}/src/packets/packet_factory.cpp \
-		${top_srcdir}/src/packets/packet_streamer.cpp \
-		${top_srcdir}/src/common/data_entry.cpp \
+		../packets/packet_factory.cpp \
+		../packets/packet_streamer.cpp \
+		../common/data_entry.cpp \
 		tair_client_capi.hpp tair_client_api.hpp \
 	       	tair_client_api_impl.hpp tair_client_capi.hpp \
           local_cache.hpp local_cache.hpp \
@@ -44,7 +44,7 @@ if WITH_COMPRESS
 COMPRESS_LDFLAGS=-lsnappy
 endif
 
-AM_LDFLAGS=-lpthread -lz -lrt ${GCOV_LIB} ${COMPRESS_LDFLAGS}
+AM_LDFLAGS=-pthread -lz -lrt ${GCOV_LIB} ${COMPRESS_LDFLAGS}
 
 lib_LTLIBRARIES=libtairclientapi.la libtairclientapi_c.la libtairclientapi_impl.la ${mc_impl_lib}
 sbin_PROGRAMS=tairclient keycleantool

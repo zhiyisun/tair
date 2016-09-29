@@ -187,7 +187,13 @@ namespace tair {
                 (*it)->item_total_count, (*it)->evict_total_count,
                 should_have_no, final_count, need_count, need_page);
 
-      adjust_info.insert(make_pair<int, int>((*it)->slab_id, need_page));
+#if 0
+      adjust_info.insert(std::make_pair<int, int>((*it)->slab_id, need_page));
+#else
+      std::pair <int,int> temp;
+      temp = make_pair((*it)->slab_id, need_page);
+      adjust_info.insert(temp);
+#endif
 
       need_alloc_page += need_count > 0 ? need_page : 0;
     }

@@ -7,7 +7,7 @@ COMPRESS_CPPFLAGS= compressor.hpp snappy_compressor.hpp
 endif
 
 AM_LDFLAGS= -rdynamic ${GCOV_LIB} \
-      -lz -lrt -lpthread \
+      -lz -lrt -pthread \
       -ldl
 
 LDADD=$(TBLIB_ROOT)/lib/libtbnet.a \

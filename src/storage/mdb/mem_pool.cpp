@@ -87,7 +87,7 @@ namespace tair {
   {
     assert(tpool != 0);
     pool = tpool;
-    asm volatile ("mfence":::"memory");
+    __sync_synchronize();
     if(inited != 1) {
       page_size = this_page_size;
       total_pages = this_total_pages;

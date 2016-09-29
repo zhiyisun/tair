@@ -19,7 +19,7 @@ LDADD= \
 	  $(TBLIB_ROOT)/lib/libtbsys.a 
 
 
-AM_LDFLAGS=-lpthread -L${top_srcdir}/test/lib/ -lgtest_main -lgtest  -lz -lrt ${GCOV_LIB}
+AM_LDFLAGS=-pthread -L${top_srcdir}/test/lib/ -lgtest_main -lgtest  -lz -lrt ${GCOV_LIB}
 
 sbin_PROGRAMS=string_local_cache_test data_entry_local_cache_test local_cache_bvt_test
 

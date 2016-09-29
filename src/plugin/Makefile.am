@@ -12,7 +12,7 @@ LDADD=$(TBLIB_ROOT)/lib/libtbnet.a $(TBLIB_ROOT)/lib/libtbsys.a \
 	$(top_builddir)/src/client/.libs/libtairclientapi.a \
 	$(top_builddir)/src/common/libtair_common.a
 
-AM_LDFLAGS=-lz -lrt -lpthread -ldl  ${GCOV_LIB}
+AM_LDFLAGS=-lz -lrt -pthread -ldl  ${GCOV_LIB}
 
 noinst_LIBRARIES=libtair_plugins.a
 libtair_plugins_a_SOURCES=plugin_manager.cpp
@@ -26,11 +26,11 @@ libsample_plugin_la_LDFLAGS= -fpic -shared
 
 
 libsync_plugin_la_SOURCES=base_plugin.hpp plugin_manager.hpp \
-												remote_sync_manager.hpp remote_sync_manager.cpp sync_packet_list.cpp  \
-												sync_packet_list.hpp \
-												$(top_builddir)/src/common/file_list_factory.hpp  \
-												$(top_builddir)/src/common/file_op.cpp \
-												$(top_builddir)/src/client/tair_client_api_impl.cpp
+			  remote_sync_manager.hpp remote_sync_manager.cpp sync_packet_list.cpp  \
+			  sync_packet_list.hpp \
+			  ../common/file_list_factory.hpp  \
+			  ../common/file_op.cpp \
+			  ../client/tair_client_api_impl.cpp
 
 libsync_plugin_la_LDFLAGS= -fpic -shared
 

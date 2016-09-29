@@ -108,8 +108,13 @@ namespace tair {
     //the count of request packets is less than the value of `lower_limit_ratio * MAX_CACHED_PACKET_COUNT, and
     //write the packets in memory to disk, while the count of request packets is more than the value of
     //'upper_limit_ratio * MAX_CACHED_PACKET_COUNT;
+#if __cplusplus <= 199711L
     static const float upper_limit_ratio = 0.8;
     static const float lower_limit_ratio = 0.2;
+#else
+    static constexpr float upper_limit_ratio = 0.8f;
+    static constexpr float lower_limit_ratio = 0.2f;
+#endif
 
     //inval_server's config file name
     std::string config_file_name;
