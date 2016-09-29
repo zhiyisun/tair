@@ -4,7 +4,7 @@ AM_CPPFLAGS= -I$(TBLIB_ROOT)/include/tbsys \
 	     -I${top_srcdir}/src/common \
 			 -I${top_srcdir}/src/statserver/include
 
-AM_LDFLAGS=-lz -lrt -pthread -ldl  ${GCOV_LIB}
+AM_LDFLAGS=-lz -lrt -lpthread -ldl  ${GCOV_LIB}
 
 noinst_LIBRARIES=libtair_stat.a
 

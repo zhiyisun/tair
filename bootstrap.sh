@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$1" = "clean" ]; then
+if [ "$1" == "clean" ]; then
     make distclean &>/dev/null
     rm -rf aclocal.m4 autom4te.cache config.guess config.sub configure depcomp INSTALL install-sh ltmain.sh missing config.log  config.status libtool
     rm -f *.rpm *.gz

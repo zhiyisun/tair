@@ -10,7 +10,7 @@ LDADD= \
 	  $(TBLIB_ROOT)/lib/libtbnet.a \
 	  $(TBLIB_ROOT)/lib/libtbsys.a
 
-AM_LDFLAGS=-L${top_builddir}/src/client/.libs  -ltairmcclientapi  -pthread
+AM_LDFLAGS=-L${top_builddir}/src/client/.libs  -ltairmcclientapi  -lpthread
 
 sbin_PROGRAMS=tair_mc_client_api_test
 

@@ -12,7 +12,7 @@ LDADD=$(TBLIB_ROOT)/lib/libtbnet.a $(TBLIB_ROOT)/lib/libtbsys.a \
 	$(top_builddir)/src/client/.libs/libtairclientapi.a \
 	$(top_builddir)/src/common/libtair_common.a
 
-AM_LDFLAGS=-lz -lrt -pthread -ldl  ${GCOV_LIB}
+AM_LDFLAGS=-lz -lrt -lpthread -ldl  ${GCOV_LIB}
 
 noinst_LIBRARIES=libtair_plugins.a
 libtair_plugins_a_SOURCES=plugin_manager.cpp

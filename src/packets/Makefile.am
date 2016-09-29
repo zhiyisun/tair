@@ -9,7 +9,7 @@ AM_CPPFLAGS= -I$(TBLIB_ROOT)/include/tbsys \
 LDADD=$(TBLIB_ROOT)/lib/libtbnet.a \
 			$(TBLIB_ROOT)/lib/libtbsys.a
 
-AM_LDFLAGS=-lz -lrt -pthread -ldl  ${GCOV_LIB}
+AM_LDFLAGS=-lz -lrt -lpthread -ldl  ${GCOV_LIB}
 
 include_HEADERS= packet_factory.hpp base_packet.hpp \
 		 duplicate_packet.hpp \

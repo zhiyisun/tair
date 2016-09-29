@@ -32,6 +32,7 @@
 #include <stdint.h>
 #include <string>
 #include "port/atomic_pointer.h"
+#include "port/atomic_count.h"
 
 #ifdef LITTLE_ENDIAN
 #define IS_LITTLE_ENDIAN true
@@ -91,6 +92,8 @@ class CondVar {
   Mutex* mu_;
 };
 
+// only support i386 / x86_64 here
+#if defined(__i386__) || defined(__x86_64__)
 template<typename T> class AtomicCount {
 public:
   explicit AtomicCount(T t) { t_ = t; }
@@ -100,21 +103,22 @@ public:
     return t_;
   }
   inline void Set(T t) {
-    __atomic_exchange_n(&t_, t, __ATOMIC_SEQ_CST);
+    atomic_exchange(&t_, t);
   }
   inline T Inc() {
-    return __atomic_add_fetch(&t_, 1, __ATOMIC_SEQ_CST);
+    return atomic_inc(&t_);
   }
   inline T Dec() {
-    return __atomic_sub_fetch(&t_, 1, __ATOMIC_SEQ_CST);
+    return atomic_dec(&t_);
   }
   inline T GetAndInc() {
-    return __atomic_fetch_add(&t_, 1, __ATOMIC_SEQ_CST);
+    return atomic_add(&t_, 1);
   }
 
 private:
   volatile T t_;
 };
+#endif
 
 inline bool Snappy_Compress(const char* input, size_t length,
                             ::std::string* output) {

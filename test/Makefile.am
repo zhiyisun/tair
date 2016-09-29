@@ -21,7 +21,7 @@ LDADD= \
 	  $(TBLIB_ROOT)/lib/libtbnet.a \
 	  $(TBLIB_ROOT)/lib/libtbsys.a 
 
-AM_LDFLAGS=-pthread -lz
+AM_LDFLAGS=-lpthread -lz
 
 #bin_PROGRAMS=get
 #get_SOURCES=get.cpp

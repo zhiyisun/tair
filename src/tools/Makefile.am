@@ -21,7 +21,7 @@ LDADD=$(top_srcdir)/src/client/.libs/libtairclientapi.a \
 	  $(COMPRESS_LDFLAGS) \
 		-lz -lrt
 
-AM_LDFLAGS=-pthread -lz -lrt ${GCOV_LIB}
+AM_LDFLAGS=-lpthread -lz -lrt ${GCOV_LIB}
 
 sbin_PROGRAMS=dump_transfer
 
