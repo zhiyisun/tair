@@ -15,6 +15,7 @@
  *
  */
 #include "request_processor.hpp"
+#define PUT_LOOPBACK 1
 
 namespace tair {
    request_processor::request_processor(tair_manager *tair_mgr, heartbeat_thread *heart_beat, tbnet::ConnectionManager *connection_mgr)
@@ -33,7 +34,7 @@ namespace tair {
       resp_size = 0;
       int rc = 0;
       send_return = true;
-
+#ifndef PUT_LOOPBACK 
       if (tair_mgr->is_working() == false) {
          return TAIR_RETURN_SERVER_CAN_NOT_WORK;
       }
@@ -76,6 +77,9 @@ namespace tair {
       log_debug("put request return: %d", rc);
       PROFILER_DUMP();
       PROFILER_STOP();
+#else
+      rc = TAIR_RETURN_SUCCESS;
+#endif
       return rc;
    }
 
