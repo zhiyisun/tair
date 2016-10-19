@@ -18,6 +18,8 @@ fi
 
 VAL_LOG_PATH=./val_log
 VAL_CMD="valgrind --tool=memcheck --leak-check=full --show-reachable=yes --log-file=${VAL_LOG_PATH}/valgrind.log."`date +%m%d%s`
+#VAL_CACHE_CMD="valgrind --tool=cachegrind --I1=32768,8,64 --D1=32768,8,64 --LL=8388608,32,64  --log-file=${VAL_LOG_PATH}/cachegrind.out.%p --trace-children=yes"
+VAL_CACHE_CMD="valgrind --tool=cachegrind --I1=32768,8,64 --D1=32768,8,64 --LL=8388608,32,64 --log-file=${VAL_LOG_PATH}/valgrind.log --cachegrind-out-file=${VAL_LOG_PATH}/cachegrind.out.%p --trace-children=yes"
 
 DS_CMD=${TAIR_BIN_DIR}/tair_server
 CS_CMD=${TAIR_BIN_DIR}/tair_cfg_svr
@@ -26,6 +28,7 @@ IV_CMD=${TAIR_BIN_DIR}/inval_server
 VAL_DS_CMD="${VAL_CMD} ${TAIR_BIN_DIR}/tair_server"
 VAL_CS_CMD="${VAL_CMD} ${TAIR_BIN_DIR}/tair_cfg_svr"
 VAL_IV_CMD="${VAL_CMD} ${TAIR_BIN_DIR}/inval_server"
+VAL_CACHE_DS_CMD="${VAL_CACHE_CMD} ${TAIR_BIN_DIR}/tair_server"
 
 check_folder()
 {
@@ -133,6 +136,10 @@ valgrind_stop_all()
   killall -15 memcheck
 }
 
+cachegrind_stop_all()
+{
+  killall -TERM cachegrind
+}
 
 clean()
 {
@@ -219,6 +226,10 @@ case "$1" in
   ;;
   valgrind_stop)
   valgrind_stop_all
+  ;;
+  cachegrind_start_ds)
+  check_folder
+  start_ds "${VAL_CACHE_DS_CMD}"
   ;;
   clean)
   clean
