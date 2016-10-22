@@ -24,6 +24,8 @@
 #include "define.hpp"
 //#include "log.hpp"
 
+#define ZHIYI_DEBUG
+
 namespace tair
 {
    namespace common {
@@ -340,7 +342,11 @@ namespace tair
          this->prefix_size = prefix_size;
        }
 
+#ifdef ZHIYI_DEBUG
+       inline void set_version(uint16_t version)
+#else
        void set_version(uint16_t version)
+#endif
        {
          data_meta.version = version;
        }

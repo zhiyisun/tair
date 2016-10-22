@@ -17,6 +17,8 @@
 #include "tair_server.hpp"
 #include "flow_control_packet.hpp"
 
+#define ZHIYI_DEBUG
+
 char g_tair_home[129];
 
 namespace tair {
@@ -265,8 +267,12 @@ namespace tair {
          }
          case TAIR_REQ_GET_PACKET:
          {
+#ifdef ZHIYI_DEBUG
+            ret = req_processor->process((request_get*)packet, send_return, stat.out);
+#else
             request_get *npacket = (request_get*)packet;
             ret = req_processor->process(npacket, send_return, stat.out);
+#endif
             send_return = false;
             break;
          }

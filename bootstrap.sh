@@ -17,4 +17,5 @@ autoconf
 automake --add-missing --force --warnings=no-portability
 ./configure --prefix=${TBLIB_ROOT}/../tair_bin
 make -j
+rm -rf ${TBLIB_ROOT}/../tair_bin/*
 make install

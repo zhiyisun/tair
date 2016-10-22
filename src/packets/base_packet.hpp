@@ -29,6 +29,8 @@
 #include "util.hpp"
 #include "log.hpp"
 
+#define ZHIYI_DEBUG
+
 using namespace std;
 namespace tair {
    using namespace common;
@@ -189,7 +191,11 @@ namespace tair {
          return direction;
       }
 
+#ifdef ZHIYI_DEBUG
+      inline void free()
+#else
       void free()
+#endif
       {
          if (!no_free) {
             delete this;

@@ -11,6 +11,8 @@
   assert(ns <= MAXAREA);   \
 } while (false) 
 
+#define ZHIYI_DEBUG
+
 namespace tair
 {
 namespace stat
@@ -112,7 +114,11 @@ Flowrate FlowControllerImpl::GetFlowrate(int ns)
 /**
  * @return ture is relaxed, (flow.status == DOWN)
  */
+#ifdef ZHIYI_DEBUG
+inline bool FlowControllerImpl::AddUp(Flow &flow, int size)
+#else
 bool FlowControllerImpl::AddUp(Flow &flow, int size)
+#endif
 {
   if (atomic_read(&flow.curt_quantity) + size < 0)
   {
@@ -230,7 +236,11 @@ void FlowControllerImpl::BackgroundCalFlows()
   }
 }
 
+#ifdef ZHIYI_DEBUG
+inline bool FlowControllerImpl::AddUp(int ns, int in, int out)
+#else
 bool FlowControllerImpl::AddUp(int ns, int in, int out)
+#endif
 {
   ASSERTNS(ns);
   // AddUp total first

@@ -15,6 +15,8 @@
 #ifndef TAIR_HASH_H
 #define TAIR_HASH_H
 
+#define ZHIYI_DEBUG
+
 inline unsigned int mur_mur_hash2 ( const void * key, int len, unsigned int seed )
 {
    // 'm' and 'r' are mixing constants generated offline.
@@ -34,6 +36,11 @@ inline unsigned int mur_mur_hash2 ( const void * key, int len, unsigned int seed
    while(len >= 4)
    {
       unsigned int k = *(unsigned int *)data;
+#ifdef ZHIYI_DEBUG
+	data += 4;
+	len -= 4;
+	__builtin_prefetch((unsigned int*)data, 0, 3);
+#endif
 
       k *= m;
       k ^= k >> r;
@@ -41,9 +48,10 @@ inline unsigned int mur_mur_hash2 ( const void * key, int len, unsigned int seed
 
       h *= m;
       h ^= k;
-
+#ifndef ZHIYI_DEBUG
       data += 4;
       len -= 4;
+#endif
    }
 
    // Handle the last few bytes of the input array

@@ -30,6 +30,7 @@
 #include "dup_sync_manager.hpp"
 #include "remote_sync_manager.hpp"
 
+#define ZHIYI_DEBUG
 
   namespace tair {
     tair_manager::tair_manager() : migrate_done_set(0)
@@ -769,6 +770,10 @@
 
     int tair_manager::get(int area, data_entry &key, data_entry &value, bool with_stat)
     {
+#ifdef ZHIYI_DEBUG
+	__builtin_prefetch(&(key.data_meta), 1, 3);
+	__builtin_prefetch(&(value.data_meta), 1, 3);
+#endif
       if (!localmode && status != STATUS_CAN_WORK) {
         return TAIR_RETURN_SERVER_CAN_NOT_WORK;
       }
@@ -782,6 +787,9 @@
       }
 
       data_entry mkey = key;
+#ifdef ZHIYI_DEBUG
+	__builtin_prefetch(&(mkey.data_meta), 1, 3);
+#endif
       mkey.merge_area(area);
 
       int bucket_number = get_bucket_number(key);

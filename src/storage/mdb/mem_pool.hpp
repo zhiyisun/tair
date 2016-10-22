@@ -17,6 +17,8 @@
 #include <iostream>
 #include <stdint.h>
 #include <stdio.h>
+
+#define ZHIYI_DEBUG
 namespace tair {
 
   class mem_pool {
@@ -38,7 +40,12 @@ namespace tair {
     {
       return impl->get_pool_addr();
     }
+
+#ifdef ZHIYI_DEBUG
+    inline int get_page_size()
+#else
     int get_page_size()
+#endif
     {
       return impl->get_page_size();
     }
@@ -69,7 +76,11 @@ namespace tair {
       char *index_to_page(int index);
       int page_to_index(const char *page);
       char *get_pool_addr();
+#ifdef ZHIYI_DEBUG
+      inline int get_page_size()
+#else
       int get_page_size()
+#endif
       {
         return page_size;
       }

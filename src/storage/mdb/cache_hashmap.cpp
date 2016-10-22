@@ -14,6 +14,9 @@
  */
 #include "cache_hashmap.hpp"
 #include "tbsys.h"
+
+#define ZHIYI_DEBUG
+
 namespace tair {
 
   void cache_hash_map::insert(mdb_item * item)
@@ -85,6 +88,12 @@ namespace tair {
     while(pos != 0) {
       prev = id_to_item(pos);
       assert(prev != 0);
+#ifdef ZHIYI_DEBUG
+	if(0 != prev->h_next)
+	{
+		__builtin_prefetch(id_to_item(prev->h_next), 0, 3);
+	}
+#endif
       if((prev->key_len == key_len)
          && (memcmp(key, ITEM_KEY(prev), key_len) == 0)) {
         break;
@@ -114,13 +123,20 @@ namespace tair {
     const unsigned char *data = (const unsigned char *) key;
     while(len >= 4) {
       unsigned int k = *(unsigned int *) data;
+#ifdef ZHIYI_DEBUG
+	data += 4;
+	len -= 4;
+	__builtin_prefetch((unsigned int*)data, 0, 3);
+#endif
       k *= m;
       k ^= k >> r;
       k *= m;
       h *= m;
       h ^= k;
+#ifndef ZHIYI_DEBUG
       data += 4;
       len -= 4;
+#endif
     }
     switch (len) {
     case 3:
