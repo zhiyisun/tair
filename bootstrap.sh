@@ -7,6 +7,7 @@ if [ "$1" = "clean" ]; then
     find . -name 'Makefile' -exec rm -f {} \;
     find . -name '.deps' -exec rm -rf {} \;
     find . -name 'Makefile.in' -exec rm -f {} \;
+    rm -rf ../tair_bin/*
     exit;
 fi
 
@@ -14,3 +15,6 @@ libtoolize --force
 aclocal
 autoconf
 automake --add-missing --force --warnings=no-portability
+./configure --prefix=${TBLIB_ROOT}/../tair_bin
+make -j
+make install
